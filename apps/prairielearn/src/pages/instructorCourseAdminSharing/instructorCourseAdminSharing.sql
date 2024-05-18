@@ -69,3 +69,19 @@ SET
   sharing_name = $sharing_name
 WHERE
   id = $course_id;
+
+-- TEST, completes/works?
+-- BLOCK check_sharing_set_shared
+SELECT EXISTS (
+  SELECT 1
+  FROM courses c
+  JOIN sharing_set_courses ssc ON c.id = ssc.course_id
+  WHERE ssc.sharing_set_id = $sharing_set_id;
+) AS shared;
+
+-- TEST, complete/works? 
+-- BLOCK sharing_set_delete
+DELETE FROM
+  sharing_sets
+WHERE
+  id = $sharing_set_id;

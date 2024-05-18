@@ -105,6 +105,22 @@ router.post(
         sharing_name: req.body.course_sharing_name.trim(),
         course_id: res.locals.course.id,
       });
+    } else if (req.body.__action === 'sharing_set_delete') {
+      await sqldb.queryZeroOrOneRowAsync(sql.sharing_set_delete, {
+        sharing_set_id: req.body.sharing_set_id,
+        course_id: res.locals.course.id,
+      });
+    } else if (req.body.__action === 'check_sharing_set_shared') {
+      const sharedWith = await sqldb.queryRow(
+        sql.select_sharing_set_shared_with,
+        {
+          sharing_set_id: req.body.sharing_set_id,
+        },
+        z.object({
+          shared_with: z.string().array(),
+        }),
+      );
+      return res.sharedWith;
     } else {
       throw new error.HttpStatusError(400, `unknown __action: ${req.body.__action}`);
     }
