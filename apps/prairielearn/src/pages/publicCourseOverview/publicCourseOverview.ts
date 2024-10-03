@@ -81,13 +81,6 @@ router.get(
     //   is_administrator: res.locals.is_administrator,
     //   authn_is_administrator: res.locals.authz_data.authn_is_administrator,
     // });
-
-    // TEST, fake data for now since we're not using selectCourseInstancesWithStaffAccess (yet at least)
-    courseInstances.forEach((ci) => {
-      ci.formatted_start_date = '1800-01-19 00:00:01 (LMT)';
-      ci.formatted_end_date = '2400-05-13 23:59:59 (CDT)';
-    });
-
   
 
     // Send response
