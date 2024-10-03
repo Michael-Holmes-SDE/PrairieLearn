@@ -13,7 +13,7 @@ import { IdSchema } from '../../lib/db-types.js';
 import { selectCourseById, selectCourseIdByInstanceId } from '../../models/course.js';
 import { selectCourseInstanceById } from '../../models/course-instances.js';
 
-import { AssessmentRowSchema, InstructorAssessments } from './publicInstructorAssessments.html.js';
+import { AssessmentRowSchema, InstructorAssessments } from './publicAssessmentPreview.html.js';
 
 const router = express.Router();
 const sql = sqldb.loadSqlEquiv(import.meta.url);
