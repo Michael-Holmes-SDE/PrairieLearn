@@ -249,6 +249,7 @@ export interface CourseInstance {
   allowAccess: CourseInstanceAllowAccess[];
   allowIssueReporting: boolean;
   groupAssessmentsBy: 'Set' | 'Module';
+  sharedPublicly: boolean;
 }
 
 export interface AssessmentAllowAccess {
@@ -392,6 +393,7 @@ export interface Question {
 }
 
 export interface CourseInstanceData {
+  sharedPublicly: boolean;
   courseInstance: InfoFile<CourseInstance>;
   assessments: Record<string, InfoFile<Assessment>>;
 }
@@ -428,9 +430,12 @@ export async function loadFullCourse(
       questions,
     );
 
+    const sharedPublicly = courseInstance.data?.sharedPublicly ?? false; // TEST
+
     courseInstances[courseInstanceId] = {
       courseInstance,
       assessments,
+      sharedPublicly,
     };
   }
   return {
